@@ -2,8 +2,8 @@ package com.gassion.tennis_match_table.repository;
 
 import com.gassion.tennis_match_table.Util.HibernateUtil;
 import com.gassion.tennis_match_table.entities.Player;
+import jakarta.persistence.Query;
 import jakarta.transaction.Transactional;
-import org.hibernate.HibernateError;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -11,6 +11,25 @@ import java.util.List;
 
 @Transactional
 public class PlayerDAO extends DAO<Player>{
+    public Player getByName(String name) {
+        Player player = null;
+
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            session.getTransaction().begin();
+
+            Query query = session.createQuery("from Player where name = :s ", Player.class);
+            query.setParameter("s", name);
+            List player1 = query.getResultList();
+
+            session.getTransaction().commit();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        }
+
+        return player;
+
+
+    }
 
     @Override
     public Player getByID(long id) throws HibernateException {
@@ -36,7 +55,8 @@ public class PlayerDAO extends DAO<Player>{
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.getTransaction().begin();
 
-            player = session.createQuery("from Player").list();
+            Query query = session.createQuery("from Player", Player.class);
+            List<Player>player1 = query.getResultList();
 
             session.getTransaction().commit();
         } catch (HibernateException e) {

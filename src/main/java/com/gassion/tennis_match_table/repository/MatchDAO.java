@@ -2,7 +2,6 @@ package com.gassion.tennis_match_table.repository;
 
 import com.gassion.tennis_match_table.Util.HibernateUtil;
 import com.gassion.tennis_match_table.entities.Match;
-import com.gassion.tennis_match_table.entities.Player;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
@@ -33,7 +32,7 @@ public class MatchDAO extends DAO<Match>{
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             session.getTransaction().begin();
 
-            matches = session.createQuery("from Match").list();
+            matches = session.createQuery("from Match", Match.class).list();
 
             session.getTransaction().commit();
         } catch (HibernateException e) {
