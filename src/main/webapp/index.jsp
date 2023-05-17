@@ -8,6 +8,11 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<div class="nav">
+    <a href="match_scores.jsp">Tennis scoreboard</a>
+    <a href="${pageContext.request.contextPath}/new-match">New match</a>
+    <a href="matches.jsp">Recent matches</a>
+</div>
+
 </body>
 </html>
