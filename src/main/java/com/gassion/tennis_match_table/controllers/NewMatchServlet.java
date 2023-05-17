@@ -1,5 +1,7 @@
 package com.gassion.tennis_match_table.controllers;
 
+import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.Util.exceptions.RequestParamException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -17,8 +19,11 @@ public class NewMatchServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, String[]> params = request.getParameterMap();
+        try {
+            ValidateUtil.newMatchRequestValidate(request);
 
-        response.getWriter().println("POST");
+        } catch (RequestParamException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
