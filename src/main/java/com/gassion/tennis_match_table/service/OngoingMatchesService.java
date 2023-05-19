@@ -1,27 +1,34 @@
 package com.gassion.tennis_match_table.service;
 
+import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.entities.LocalEntities.MatchDTO;
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;
 import com.gassion.tennis_match_table.repository.PlayerDAO;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
-    public static ConcurrentHashMap<Long, Math> ongoingMatches = new ConcurrentHashMap<>();
-    public static MatchDAO matchDAO = new MatchDAO();
-    public static PlayerDAO playerDAO = new PlayerDAO();
+    public static List<MatchDTO> ongoingMatches = new ArrayList<>();
+    private static MatchDAO matchDAO = new MatchDAO();
+    private static PlayerDAO playerDAO = new PlayerDAO();
 
-    public static void createMatch(List<Player> players) {
-        Player player1 = playerDAO.getByName(players.get(0).getName());
-        Player player2 = playerDAO.getByName(players.get(1).getName());
+    private static ValidateUtil validateUtil = new ValidateUtil();
 
-        Match match = new Match();
-        match.setPlayer1(player1.getId());
-        match.setPlayer2(player2.getId());
+    public static void addMatch(List<Player> players) throws Exception{
+        Player playerOne = playerDAO.getByName(players.get(0).getName());
+        Player playerTwo = playerDAO.getByName(players.get(1).getName());
 
-        matchDAO.add(match);
+        validateUtil.ongoingMatchExistValidation(players);
+
+        MatchDTO newMatch = new MatchDTO();
+        newMatch.setPlayerOne(playerOne);
+        newMatch.setPlayerTwo(playerTwo);
+
+        ongoingMatches.add(newMatch);
     }
 
     public static void deleteMatch(Long matchID) {
@@ -35,6 +42,4 @@ public class OngoingMatchesService {
     public static void saveMatch(Match match) {
 
     }
-
-
 }
