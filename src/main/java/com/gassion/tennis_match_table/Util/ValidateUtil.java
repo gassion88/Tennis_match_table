@@ -29,18 +29,10 @@ public class ValidateUtil {
     public void ongoingMatchExistValidation(List<Player> players) throws Exception {
         String newMatchPlayerOneName = players.get(0).getName();
         String newMatchPlayerTwoName = players.get(1).getName();
-        List<MatchDTO> ongoingMatches = OngoingMatchesService.ongoingMatches;
 
-        for (MatchDTO match : ongoingMatches) {
-            String ongoingMatchPlayersNames = match.getPlayerOne().getName() + match.getPlayerTwo().getName();
-
-            if (ongoingMatchPlayersNames.equals(newMatchPlayerOneName + newMatchPlayerTwoName) ||
-                    ongoingMatchPlayersNames.equals(newMatchPlayerTwoName + newMatchPlayerOneName)) {
-                throw new Exception("Exist Players");
-            }
+        if (OngoingMatchesService.ongoingMatches.containsKey(newMatchPlayerOneName + newMatchPlayerTwoName) ||
+                OngoingMatchesService.ongoingMatches.containsKey(newMatchPlayerTwoName + newMatchPlayerOneName)) {
+            throw new Exception("Exist Players");
         }
-
-
-
     }
 }
