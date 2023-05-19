@@ -11,4 +11,9 @@ public class MatchGame {
     private List<MatchScore> scores;
     private MatchState gameState;
     private int counter;
+
+    public void addScoreToGame(long ScoredPlayerID, long matchID) {
+        MatchScore newScore = new MatchScore(ScoredPlayerID, matchID);
+        scores.add(newScore);
+    }
 }
