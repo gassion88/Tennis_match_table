@@ -6,6 +6,6 @@ import lombok.Data;
 public class MatchScore {
     private long id;
     private long matchID;
-    private long player;
+    private long playerId;
     private int counter;
 }
