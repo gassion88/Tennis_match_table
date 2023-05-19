@@ -3,18 +3,19 @@ package com.gassion.tennis_match_table.entities.LocalEntities;
 import com.gassion.tennis_match_table.entities.Player;
 import lombok.Data;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class MatchDTO {
-    private long matchID;
+    private UUID matchUUID;
     private Player PlayerOne;
     private Player PlayerTwo;
     private List<MatchSet> sets;
     private MatchState state;
 
-    public void addScore(long scoredPlayerID) {
+    public void addScore(Player scoredPlayerName) {
        MatchGame currentGame = getOrCreateCurrentGame();
-       currentGame.addScoreToGame(scoredPlayerID, matchID);
+       currentGame.addScoreToGame(scoredPlayerName);
 
        //updateCurrentGameState();
     }
@@ -30,5 +31,6 @@ public class MatchDTO {
 
             return null;
         }
+        return null;
     }
 }

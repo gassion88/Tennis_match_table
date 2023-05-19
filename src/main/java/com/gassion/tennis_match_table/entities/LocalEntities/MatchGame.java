@@ -1,19 +1,18 @@
 package com.gassion.tennis_match_table.entities.LocalEntities;
 
+import com.gassion.tennis_match_table.entities.Player;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class MatchGame {
-    private long id;
-    private long matchID;
-    private List<MatchScore> scores;
+    private List<MatchScore> scores = new ArrayList<>();
     private MatchState gameState;
-    private int counter;
 
-    public void addScoreToGame(long ScoredPlayerID, long matchID) {
-        MatchScore newScore = new MatchScore(ScoredPlayerID, matchID);
+    public void addScoreToGame(Player ScoredPlayerName) {
+        MatchScore newScore = new MatchScore(ScoredPlayerName);
         scores.add(newScore);
     }
 }
