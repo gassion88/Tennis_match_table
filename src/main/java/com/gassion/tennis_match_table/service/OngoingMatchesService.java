@@ -7,35 +7,38 @@ import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;
 import com.gassion.tennis_match_table.repository.PlayerDAO;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
-    public static List<MatchDTO> ongoingMatches = new ArrayList<>();
-    private static MatchDAO matchDAO = new MatchDAO();
-    private static PlayerDAO playerDAO = new PlayerDAO();
+    public static Map<UUID, MatchDTO> ongoingMatches = new ConcurrentHashMap<>();
+    private static final MatchDAO MATCH_DAO = new MatchDAO();
+    private static final PlayerDAO PLAYER_DAO = new PlayerDAO();
 
-    private static ValidateUtil validateUtil = new ValidateUtil();
+    private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
-    public static void addMatch(List<Player> players) throws Exception{
-        Player playerOne = playerDAO.getByName(players.get(0).getName());
-        Player playerTwo = playerDAO.getByName(players.get(1).getName());
+    public static UUID addMatch(List<Player> players) throws Exception{
+        VALIDATE_UTIL.ongoingMatchExistValidation(players);
+        Player playerOne = players.get(0);
+        Player playerTwo = players.get(1);
 
-        validateUtil.ongoingMatchExistValidation(players);
+        MatchDTO newMatchDTO = new MatchDTO();
+        newMatchDTO.setPlayerOne(playerOne);
+        newMatchDTO.setPlayerTwo(playerTwo);
+        UUID newMatchKey = UUID.randomUUID();
+        newMatchDTO.setMatchUUID(newMatchKey);
 
-        MatchDTO newMatch = new MatchDTO();
-        newMatch.setPlayerOne(playerOne);
-        newMatch.setPlayerTwo(playerTwo);
+        ongoingMatches.put(newMatchKey, newMatchDTO);
+        return newMatchKey;
+    }
 
-        ongoingMatches.add(newMatch);
+    public static MatchDTO getMatchDTO(UUID matchKey) {
+        return ongoingMatches.get(matchKey);
     }
 
     public static void deleteMatch(Long matchID) {
-
-    }
-
-    public static void setMatch(Match match) {
 
     }
 
