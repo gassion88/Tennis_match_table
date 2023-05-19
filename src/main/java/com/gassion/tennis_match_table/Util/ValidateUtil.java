@@ -1,8 +1,12 @@
 package com.gassion.tennis_match_table.Util;
 
 import com.gassion.tennis_match_table.Util.exceptions.RequestParamException;
+import com.gassion.tennis_match_table.entities.LocalEntities.MatchDTO;
+import com.gassion.tennis_match_table.entities.Player;
+import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import jakarta.servlet.http.HttpServletRequest;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -20,5 +24,23 @@ public class ValidateUtil {
         if (params.size() != 2) {
             throw new RequestParamException("Wrong number of arguments");
         }
+    }
+
+    public void ongoingMatchExistValidation(List<Player> players) throws Exception {
+        String newMatchPlayerOneName = players.get(0).getName();
+        String newMatchPlayerTwoName = players.get(1).getName();
+        List<MatchDTO> ongoingMatches = OngoingMatchesService.ongoingMatches;
+
+        for (MatchDTO match : ongoingMatches) {
+            String ongoingMatchPlayersNames = match.getPlayerOne().getName() + match.getPlayerTwo().getName();
+
+            if (ongoingMatchPlayersNames.equals(newMatchPlayerOneName + newMatchPlayerTwoName) ||
+                    ongoingMatchPlayersNames.equals(newMatchPlayerTwoName + newMatchPlayerOneName)) {
+                throw new Exception("Exist Players");
+            }
+        }
+
+
+
     }
 }
