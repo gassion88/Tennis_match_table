@@ -21,6 +21,13 @@
                         <input type="text" name="player1" id="player1" placeholder="P1 name" required >
                         <label for="player2"><strong>Player 2 name</strong></label>
                         <input type="text" name="player2" id="player2" placeholder="P2 name" required >
+
+                        <label ><strong>Sets count</strong></label>
+                        <input checked type="radio" id="sets" name="setsCount" value="3">
+                        <label for="sets">3</label>
+                        <input type="radio" id="sets2" name="setsCount" value="5">
+                        <label for="sets2">5</label>
+
                         <input type="submit" value="Start match!">
                     </div>
                 </div>

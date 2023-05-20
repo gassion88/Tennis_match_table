@@ -20,19 +20,20 @@ public class OngoingMatchesService {
 
     private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
-    public static UUID createMatch(List<Player> players) throws Exception{
+    public static UUID createMatch(List<Player> players, int setsCount) throws Exception{
         VALIDATE_UTIL.ongoingMatchExistValidation(players);
         Player playerOne = players.get(0);
         Player playerTwo = players.get(1);
 
-        MatchModel newMatchDTO = new MatchModel();
+        MatchModel newMatchModel = new MatchModel();
         UUID newMatchKey = UUID.randomUUID();
-        newMatchDTO.setPlayerOne(playerOne);
-        newMatchDTO.setPlayerTwo(playerTwo);
-        newMatchDTO.setMatchUUID(newMatchKey);
-        newMatchDTO.setState(MatchState.ONGOING);
+        newMatchModel.setPlayerOne(playerOne);
+        newMatchModel.setPlayerTwo(playerTwo);
+        newMatchModel.setMatchUUID(newMatchKey);
+        newMatchModel.setSetsCount(setsCount);
+        newMatchModel.setState(MatchState.ONGOING);
 
-        ongoingMatches.put(newMatchKey, newMatchDTO);
+        ongoingMatches.put(newMatchKey, newMatchModel);
         return newMatchKey;
     }
 

@@ -26,8 +26,9 @@ public class NewMatchServlet extends HttpServlet {
         try {
             ValidateUtil.newMatchRequestValidate(request);
             List<Player> players = PlayerFactory.getPlayersFromRequest(request);
+            int setsCount = Integer.parseInt(request.getParameter("setsCount"));
 
-            UUID newMatchKey = OngoingMatchesService.createMatch(players);
+            UUID newMatchKey = OngoingMatchesService.createMatch(players, setsCount);
 
             response.sendRedirect(request.getContextPath() + "/match-score?uuid=" + newMatchKey);
         } catch (Exception e) {

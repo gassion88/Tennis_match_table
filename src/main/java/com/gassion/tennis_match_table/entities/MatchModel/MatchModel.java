@@ -14,6 +14,7 @@ public class MatchModel {
     private Player PlayerOne;
     private Player PlayerTwo;
     private List<MatchSet> sets = new ArrayList<>();
+    private int setsCount;
     private MatchState state;
 
     public void addScore(String scoredPlayerName) {
