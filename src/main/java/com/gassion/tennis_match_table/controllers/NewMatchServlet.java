@@ -4,6 +4,7 @@ import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.entities.factories.PlayerFactory;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
+import com.gassion.tennis_match_table.view.NewMatchView;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -14,9 +15,10 @@ import java.util.UUID;
 
 @WebServlet(name = "NewMatchServlet", value = "/new-match")
 public class NewMatchServlet extends HttpServlet {
+    private static final NewMatchView NEW_MATCH_VIEW = new NewMatchView();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/new_match.jsp");
+        NEW_MATCH_VIEW.display(request, response, null);
     }
 
     @Override
@@ -26,7 +28,6 @@ public class NewMatchServlet extends HttpServlet {
             List<Player> players = PlayerFactory.getPlayersFromRequest(request);
 
             UUID newMatchKey = OngoingMatchesService.createMatch(players);
-            //MatchDTO newMatch = OngoingMatchesService.getMatchDTO(newMatchKey);
 
             response.sendRedirect(request.getContextPath() + "/match-score?uuid=" + newMatchKey);
         } catch (Exception e) {
