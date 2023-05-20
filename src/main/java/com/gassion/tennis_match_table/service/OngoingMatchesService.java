@@ -36,7 +36,7 @@ public class OngoingMatchesService {
         return newMatchKey;
     }
 
-    public static MatchModel getMatchDTO(UUID matchKey) {
+    public static MatchModel getMatchModel(UUID matchKey) {
         return ongoingMatches.get(matchKey);
     }
 
