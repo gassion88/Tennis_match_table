@@ -1,6 +1,6 @@
 package com.gassion.tennis_match_table.entities.DTO;
 
-public class TwoPlayersMatchDTO {
+public class TwoPlayersMatchDTO extends DTO{
     public String PlayerOneName;
     public String PlayerTwoName;
     public int PlayerOneSets;

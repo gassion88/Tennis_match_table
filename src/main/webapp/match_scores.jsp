@@ -1,3 +1,9 @@
+<%@ page import="com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO" %>
+<%@ page import="com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory" %>
+<%
+    TwoPlayersMatchDTO matchDTO = (TwoPlayersMatchDTO) request.getAttribute("matchJSON");
+    System.out.println(matchDTO.PlayerOneName);
+%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,30 +22,30 @@
         <table>
             <tr>
                 <td></td>
-                <th>${PlayerOneName}</th>
-                <th>${PlayerTwoName}</th>
+                <th><%=matchDTO.PlayerOneName%></th>
+                <th><%=matchDTO.PlayerTwoName%></th>
             </tr>
             <tr>
                 <td>Score</td>
-                <td>${p1score}</td>
-                <td>${p2score}</td>
+                <td><%=matchDTO.PlayerOneScores%></td>
+                <td><%=matchDTO.PlayerTwoScores%></td>
             </tr>
             <tr>
                 <td>Game</td>
-                <td>${p1game}</td>
-                <td>${p2game}</td>
+                <td><%=matchDTO.PlayerOneGames%></td>
+                <td><%=matchDTO.PlayerTwoGames%></td>
             </tr>
             <tr>
                 <td>Set</td>
-                <td>${p1set}</td>
-                <td>${p2set}</td>
+                <td><%=matchDTO.PlayerOneSets%></td>
+                <td><%=matchDTO.PlayerTwoSets%></td>
             </tr>
         </table>
 
         <div>
             <form action="match-score?uuid=${uuid}" method="post" name="scoredform">
-                <button name = "goal" value="1">${p1name} scored!</button>
-                <button name="goal" value="2">${p2name} scored!</button>
+                <button name = "goal" value="<%=matchDTO.PlayerOneName%>"><%=matchDTO.PlayerOneName%> scored!</button>
+                <button name="goal" value="<%=matchDTO.PlayerOneName%>"><%=matchDTO.PlayerOneName%> scored!</button>
             </form>
         </div>
 

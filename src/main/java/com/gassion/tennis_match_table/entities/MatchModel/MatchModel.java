@@ -13,7 +13,7 @@ public class MatchModel {
     private UUID matchUUID;
     private Player PlayerOne;
     private Player PlayerTwo;
-    private List<MatchSet> sets;
+    private List<MatchSet> sets = new ArrayList<>();
     private MatchState state;
 
     public void addScore(String scoredPlayerName) {
@@ -38,6 +38,10 @@ public class MatchModel {
     }
 
     public int getPlayerWonSets(MatchState state) {
+        if (sets.size() == 0) {
+            return 0;
+        }
+
         int playerWonSets = 0;
 
         for (MatchSet set : sets) {
@@ -52,6 +56,10 @@ public class MatchModel {
     }
 
     public int getPlayerWonGames(MatchState state) {
+        if (sets.size() == 0) {
+            return 0;
+        }
+
         int playerWonGames = 0;
 
         MatchSet currentSet = sets.get(sets.size()-1);
@@ -68,6 +76,10 @@ public class MatchModel {
     }
 
     public int getPlayerWonScores(String playerName) {
+        if (sets.size() == 0) {
+            return 0;
+        }
+
         int playerWonScores = 0;
 
         MatchSet currentSet = sets.get(sets.size()-1);
