@@ -1,4 +1,4 @@
-package com.gassion.tennis_match_table.entities.LocalEntities;
+package com.gassion.tennis_match_table.entities.MatchModel;
 
 import lombok.Data;
 

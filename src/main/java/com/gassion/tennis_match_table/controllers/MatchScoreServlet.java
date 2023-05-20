@@ -1,6 +1,7 @@
 package com.gassion.tennis_match_table.controllers;
 
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchModel;
+import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.MatchScoreView;
 import jakarta.servlet.*;
@@ -17,6 +18,7 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
         MatchModel match = OngoingMatchesService.getMatchDTO(matchUUID);
+        TwoPlayersMatchDTO matchDTO =
 
         MATCH_SCORE_VIEW.display(request, response, match);
     }

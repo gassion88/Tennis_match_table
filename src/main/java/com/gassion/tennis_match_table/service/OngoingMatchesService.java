@@ -1,8 +1,8 @@
 package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchModel;
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchState;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;

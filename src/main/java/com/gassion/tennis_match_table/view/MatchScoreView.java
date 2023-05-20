@@ -1,6 +1,6 @@
 package com.gassion.tennis_match_table.view;
 
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchModel;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
