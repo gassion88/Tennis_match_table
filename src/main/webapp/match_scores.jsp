@@ -41,7 +41,7 @@
         </table>
 
         <div>
-            <form action="match-score?uuid=${uuid}" method="post" name="scoredform">
+            <form action="match-score?uuid=<%=matchDTO.matchUUID.toString()%>>" method="post" name="scoredform">
                 <button name = "goal" value="<%=matchDTO.PlayerOneName%>"><%=matchDTO.PlayerOneName%> scored!</button>
                 <button name="goal" value="<%=matchDTO.PlayerOneName%>"><%=matchDTO.PlayerOneName%> scored!</button>
             </form>
