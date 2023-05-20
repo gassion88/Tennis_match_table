@@ -2,6 +2,7 @@ package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.LocalEntities.MatchDTO;
+import com.gassion.tennis_match_table.entities.LocalEntities.MatchState;
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;
@@ -19,16 +20,17 @@ public class OngoingMatchesService {
 
     private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
-    public static UUID addMatch(List<Player> players) throws Exception{
+    public static UUID createMatch(List<Player> players) throws Exception{
         VALIDATE_UTIL.ongoingMatchExistValidation(players);
         Player playerOne = players.get(0);
         Player playerTwo = players.get(1);
 
         MatchDTO newMatchDTO = new MatchDTO();
+        UUID newMatchKey = UUID.randomUUID();
         newMatchDTO.setPlayerOne(playerOne);
         newMatchDTO.setPlayerTwo(playerTwo);
-        UUID newMatchKey = UUID.randomUUID();
         newMatchDTO.setMatchUUID(newMatchKey);
+        newMatchDTO.setState(MatchState.ONGOING);
 
         ongoingMatches.put(newMatchKey, newMatchDTO);
         return newMatchKey;
