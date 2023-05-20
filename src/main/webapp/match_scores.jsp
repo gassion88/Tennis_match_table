@@ -1,8 +1,6 @@
 <%@ page import="com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO" %>
-<%@ page import="com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory" %>
 <%
     TwoPlayersMatchDTO matchDTO = (TwoPlayersMatchDTO) request.getAttribute("matchJSON");
-    System.out.println(matchDTO.PlayerOneName);
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
