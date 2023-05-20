@@ -14,7 +14,7 @@
         <div class="content">
             <h1>New match</h1>
 
-            <form action="new-match" method="post">
+            <form action="${pageContext.request.contextPath}/new-match" method="post">
                 <div>
                     <div>
                         <label for="player1"><strong>Player 1 name</strong></label>
