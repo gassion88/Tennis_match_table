@@ -1,7 +1,6 @@
 package com.gassion.tennis_match_table.Util;
 
 import com.gassion.tennis_match_table.Util.exceptions.RequestParamException;
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchDTO;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import jakarta.servlet.http.HttpServletRequest;

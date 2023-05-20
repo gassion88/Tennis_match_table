@@ -7,5 +7,5 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MatchScore {
-    private Player playerName;
+    private String playerName;
 }

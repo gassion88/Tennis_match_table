@@ -11,7 +11,7 @@ public class MatchGame {
     private List<MatchScore> scores = new ArrayList<>();
     private MatchState gameState;
 
-    public void addScoreToGame(Player ScoredPlayerName) {
+    public void addScoreToGame(String ScoredPlayerName) {
         MatchScore newScore = new MatchScore(ScoredPlayerName);
         scores.add(newScore);
     }

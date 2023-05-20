@@ -1,7 +1,7 @@
 package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchDTO;
+import com.gassion.tennis_match_table.entities.LocalEntities.MatchModel;
 import com.gassion.tennis_match_table.entities.LocalEntities.MatchState;
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.Player;
@@ -14,7 +14,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class OngoingMatchesService {
-    public static Map<UUID, MatchDTO> ongoingMatches = new ConcurrentHashMap<>();
+    public static Map<UUID, MatchModel> ongoingMatches = new ConcurrentHashMap<>();
     private static final MatchDAO MATCH_DAO = new MatchDAO();
     private static final PlayerDAO PLAYER_DAO = new PlayerDAO();
 
@@ -25,7 +25,7 @@ public class OngoingMatchesService {
         Player playerOne = players.get(0);
         Player playerTwo = players.get(1);
 
-        MatchDTO newMatchDTO = new MatchDTO();
+        MatchModel newMatchDTO = new MatchModel();
         UUID newMatchKey = UUID.randomUUID();
         newMatchDTO.setPlayerOne(playerOne);
         newMatchDTO.setPlayerTwo(playerTwo);
@@ -36,7 +36,7 @@ public class OngoingMatchesService {
         return newMatchKey;
     }
 
-    public static MatchDTO getMatchDTO(UUID matchKey) {
+    public static MatchModel getMatchDTO(UUID matchKey) {
         return ongoingMatches.get(matchKey);
     }
 

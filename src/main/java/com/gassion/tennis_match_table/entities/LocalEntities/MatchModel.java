@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
-public class MatchDTO {
+public class MatchModel {
     private UUID matchUUID;
     private Player PlayerOne;
     private Player PlayerTwo;
     private List<MatchSet> sets;
     private MatchState state;
 
-    public void addScore(Player scoredPlayerName) {
+    public void addScore(String scoredPlayerName) {
        MatchGame currentGame = getOrCreateCurrentGame();
        currentGame.addScoreToGame(scoredPlayerName);
 

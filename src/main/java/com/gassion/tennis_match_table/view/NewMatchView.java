@@ -1,6 +1,6 @@
 package com.gassion.tennis_match_table.view;
 
-import com.gassion.tennis_match_table.entities.LocalEntities.MatchDTO;
+import com.gassion.tennis_match_table.entities.LocalEntities.MatchModel;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,7 +11,7 @@ public class NewMatchView extends View{
     String page = "/new_match.jsp";
 
     @Override
-    public void display(HttpServletRequest request, HttpServletResponse response, MatchDTO matchDTO) throws IOException, ServletException {
+    public void display(HttpServletRequest request, HttpServletResponse response, MatchModel matchDTO) throws IOException, ServletException {
         request.getServletContext().getRequestDispatcher(page).forward(request, response);
     }
 }
