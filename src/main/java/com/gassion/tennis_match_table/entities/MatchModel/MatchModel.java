@@ -14,7 +14,8 @@ public class MatchModel {
     private Player PlayerOne;
     private Player PlayerTwo;
     private List<MatchSet> sets = new ArrayList<>();
-    private int setsCount;
+    private int setsCountInGame;
+    private boolean taiBreak;
     private MatchState state;
 
 //    public void addScore(String scoredPlayerName) {
@@ -24,7 +25,7 @@ public class MatchModel {
 //       //updateCurrentGameState();
 //    }
 
-    private MatchGame getCurrentGame() {
+    public MatchGame getCurrentGame() {
         MatchSet currentSet = getCurrentSet();
 
         for (MatchGame matchGame : currentSet.getGames()) {
@@ -38,7 +39,7 @@ public class MatchModel {
         return currentSet.getGames().get(currentSet.getGames().size()-1);
     }
 
-    private MatchSet getCurrentSet() {
+    public MatchSet getCurrentSet() {
         for (MatchSet set : sets) {
             MatchState matchSetState = set.getGameState();
 
@@ -64,16 +65,14 @@ public class MatchModel {
         return playerWonSets;
     }
 
-    public int getPlayerWonGames(MatchState state) {
-        if (sets.size() == 0) {
+    public int getPlayerWonGamesToSet(MatchState state, MatchSet set) {
+        if (set.getGames().size() == 0) {
             return 0;
         }
 
         int playerWonGames = 0;
 
-        MatchSet currentSet = getCurrentSet();
-
-            for (MatchGame game :  currentSet.getGames()){
+            for (MatchGame game :  set.getGames()){
                 MatchState gameState = game.getGameState();
 
                 if (gameState == state) {
@@ -84,16 +83,14 @@ public class MatchModel {
         return playerWonGames;
     }
 
-    public int getPlayerWonScores(String playerName) {
-        if (sets.size() == 0) {
+    public int getPlayerWonScoresToGame(String playerName, MatchGame game) {
+        if (game.getScores().size() == 0) {
             return 0;
         }
 
         int playerWonScores = 0;
 
-        MatchGame currentGame = getCurrentGame();
-
-        for (MatchScore score :  currentGame.getScores()){
+        for (MatchScore score :  game.getScores()){
             String scorePlayerName = score.getPlayerName();
 
             if (Objects.equals(scorePlayerName, playerName)) {

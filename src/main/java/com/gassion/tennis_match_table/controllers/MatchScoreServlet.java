@@ -33,6 +33,8 @@ public class MatchScoreServlet extends HttpServlet {
 
             MatchModel matchModel = OngoingMatchesService.getMatchModel(matchUUID);
             ValidateUtil.matchEndValidate(matchModel.getState());
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
