@@ -21,7 +21,7 @@ public class ValidateUtil {
             throw new RequestParamException("Required fields are not filled");
         }
 
-        if (params.size() != 2) {
+        if (params.size() != 3) {
             throw new RequestParamException("Wrong number of arguments");
         }
     }
