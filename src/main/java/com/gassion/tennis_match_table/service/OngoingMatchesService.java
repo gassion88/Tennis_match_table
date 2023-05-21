@@ -1,7 +1,9 @@
 package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchGame;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchSet;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.Player;
@@ -30,7 +32,11 @@ public class OngoingMatchesService {
         newMatchModel.setPlayerOne(playerOne);
         newMatchModel.setPlayerTwo(playerTwo);
         newMatchModel.setMatchUUID(newMatchKey);
-        newMatchModel.setSetsCount(setsCount);
+        newMatchModel.setSetsCountInGame(setsCount);
+        newMatchModel.getSets().add(new MatchSet());
+        newMatchModel.getCurrentSet().setSetState(MatchState.ONGOING);
+        newMatchModel.getCurrentSet().getGames().add(new MatchGame());
+        newMatchModel.getCurrentGame().setGameState(MatchState.ONGOING);
         newMatchModel.setState(MatchState.ONGOING);
 
         ongoingMatches.put(newMatchKey, newMatchModel);

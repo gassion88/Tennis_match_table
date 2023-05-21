@@ -9,12 +9,12 @@ public class MatchDTOFactory {
         matchDTO.matchUUID = matchModel.getMatchUUID();
         matchDTO.PlayerOneName = matchModel.getPlayerOne().getName();
         matchDTO.PlayerTwoName = matchModel.getPlayerTwo().getName();
-        matchDTO.PlayerOneSets = matchModel.getPlayerWonSets(MatchState.PLAYER_ONE_WIN);
-        matchDTO.PlayerTwoSets = matchModel.getPlayerWonSets(MatchState.PLAYER_TWO_WIN);
-        matchDTO.PlayerOneGames = matchModel.getPlayerWonGames(MatchState.PLAYER_ONE_WIN);
-        matchDTO.PlayerTwoGames = matchModel.getPlayerWonGames(MatchState.PLAYER_TWO_WIN);
-        matchDTO.PlayerOneScores = matchModel.getPlayerWonScores(matchModel.getPlayerOne().getName());
-        matchDTO.PlayerTwoScores = matchModel.getPlayerWonScores(matchModel.getPlayerTwo().getName());
+        matchDTO.PlayerOneSets = matchModel.getPlayerWinsSetsCountToMatch(MatchState.PLAYER_ONE_WIN);
+        matchDTO.PlayerTwoSets = matchModel.getPlayerWinsSetsCountToMatch(MatchState.PLAYER_TWO_WIN);
+        matchDTO.PlayerOneGames = matchModel.getPlayerWinGamesCountToSet(MatchState.PLAYER_ONE_WIN, matchModel.getCurrentSet());
+        matchDTO.PlayerTwoGames = matchModel.getPlayerWinGamesCountToSet(MatchState.PLAYER_TWO_WIN, matchModel.getCurrentSet());
+        matchDTO.PlayerOneScores = matchModel.getPlayerWonScoresToGame(matchModel.getPlayerOne().getName(), matchModel.getCurrentGame());
+        matchDTO.PlayerTwoScores = matchModel.getPlayerWonScoresToGame(matchModel.getPlayerTwo().getName(), matchModel.getCurrentGame());
 
         return matchDTO;
     }
