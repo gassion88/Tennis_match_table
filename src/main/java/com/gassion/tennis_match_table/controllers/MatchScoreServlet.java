@@ -1,5 +1,6 @@
 package com.gassion.tennis_match_table.controllers;
 
+import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
@@ -25,12 +26,15 @@ public class MatchScoreServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String playerName = request.getParameter("goal");
-        UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            String playerName = request.getParameter("goal");
+            UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
 
-        MatchModel matchDTO = OngoingMatchesService.getMatchModel(matchUUID);
-
-        System.out.println(123);
+            MatchModel matchModel = OngoingMatchesService.getMatchModel(matchUUID);
+            ValidateUtil.matchEndValidate(matchModel.getState());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
