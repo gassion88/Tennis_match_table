@@ -1,6 +1,7 @@
 package com.gassion.tennis_match_table.Util;
 
 import com.gassion.tennis_match_table.Util.exceptions.RequestParamException;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +23,12 @@ public class ValidateUtil {
 
         if (params.size() != 2) {
             throw new RequestParamException("Wrong number of arguments");
+        }
+    }
+
+    public static void matchEndValidate(MatchState state) throws Exception {
+        if (state != MatchState.ONGOING) {
+            throw new Exception("Match end");
         }
     }
 
