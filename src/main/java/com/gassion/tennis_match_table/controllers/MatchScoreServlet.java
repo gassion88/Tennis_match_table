@@ -4,6 +4,7 @@ import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
+import com.gassion.tennis_match_table.service.MatchScoreCalculationService;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.MatchScoreView;
 import jakarta.servlet.*;
@@ -29,12 +30,17 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             String playerName = request.getParameter("goal");
+            System.out.println(request.getParameter("uuid"));
             UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
 
             MatchModel matchModel = OngoingMatchesService.getMatchModel(matchUUID);
             ValidateUtil.matchEndValidate(matchModel.getState());
 
+            MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService(matchModel);
+            matchScoreCalculationService.goal(playerName);
 
+            TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(matchModel);
+            MATCH_SCORE_VIEW.display(request, response, matchDTO);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

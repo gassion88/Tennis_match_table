@@ -42,9 +42,11 @@ public class MatchScoreCalculationService {
     }
 
     private void addNewSetToMatch() {
+        match.addSetToMatch();
     }
 
     private void addNewGameToSet() {
+        match.getCurrentSet().addGameToSet();
     }
 
     private MatchState checkMatchState() {
@@ -64,7 +66,7 @@ public class MatchScoreCalculationService {
         if (playerOneSetsWinToMatch >= setsCountInGame && playerOneSetsWinToMatch - playerTwoSetsWinToMatch >= LEAD_ON_POINTS_TO_WIN) {
             return MatchState.PLAYER_ONE_WIN;
         } else if (playerTwoSetsWinToMatch >= setsCountInGame && playerTwoSetsWinToMatch - playerOneSetsWinToMatch >= LEAD_ON_POINTS_TO_WIN) {
-            return MatchState.PLAYER_TWO_WIN
+            return MatchState.PLAYER_TWO_WIN;
         }
 
         match.setState(MatchState.ONGOING);
