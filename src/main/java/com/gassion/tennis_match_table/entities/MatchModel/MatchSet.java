@@ -10,4 +10,11 @@ public class MatchSet {
     private List<MatchGame> games = new ArrayList<>();
     private MatchState setState;
     private boolean nowTaiBreak;
+
+    public void addGameToSet() {
+        MatchGame newGame = new MatchGame();
+        newGame.setGameState(MatchState.ONGOING);
+
+        games.add(newGame);
+    }
 }

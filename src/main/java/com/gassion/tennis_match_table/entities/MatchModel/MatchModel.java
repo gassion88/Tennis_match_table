@@ -18,12 +18,12 @@ public class MatchModel {
     private boolean taiBreak;
     private MatchState state;
 
-//    public void addScore(String scoredPlayerName) {
-//       MatchGame currentGame = getOrCreateCurrentGame();
-//       currentGame.addScoreToGame(scoredPlayerName);
-//
-//       //updateCurrentGameState();
-//    }
+    public void addSetToMatch() {
+        MatchSet newSet = new MatchSet();
+        newSet.setSetState(MatchState.ONGOING);
+
+        sets.add(newSet);
+    }
 
     public MatchGame getCurrentGame() {
         MatchSet currentSet = getCurrentSet();
