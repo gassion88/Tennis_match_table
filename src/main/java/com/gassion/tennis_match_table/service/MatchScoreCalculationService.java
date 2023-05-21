@@ -31,25 +31,23 @@ public class MatchScoreCalculationService {
 
     private void checkOrUpdateMatchState(MatchModel match) {
         MatchState currentGameState = checkCurrentGame();
-        MatchState currentSet = checkCurrentSet();
-        MatchState MathState = checkMatchState();
+        MatchState currentSetState = checkCurrentSet();
+        MatchState currentMatchState = checkMatchState();
 
-        if (currentGameState != MatchState.ONGOING) {
-
-            if (currentSet == MatchState.ONGOING) {
-                addNewGameToSet();
-            } else if (currentSet != MatchState.ONGOING && !isMachEnd()){
-                addNewSetToMatch();
-            } else {
-                endToMatch();
-            }
+        if (currentGameState != MatchState.ONGOING && currentSetState == MatchState.ONGOING) {
+            addNewGameToSet();
+        } else if (currentSetState != MatchState.ONGOING && currentMatchState == MatchState.ONGOING) {
+            addNewSetToMatch();
         }
+    }
 
+    private void addNewSetToMatch() {
+    }
 
+    private void addNewGameToSet() {
     }
 
     private MatchState checkMatchState() {
-        MatchState matchState = MatchState.ONGOING;
         int playerOneSetsWinToMatch = match.getPlayerWinsSetsCountToMatch(MatchState.PLAYER_ONE_WIN);
         int playerTwoSetsWinToMatch = match.getPlayerWinsSetsCountToMatch(MatchState.PLAYER_ONE_WIN);
 
@@ -62,9 +60,15 @@ public class MatchScoreCalculationService {
                 return MatchState.PLAYER_TWO_WIN;
             }
         }
-        
 
+        if (playerOneSetsWinToMatch >= setsCountInGame && playerOneSetsWinToMatch - playerTwoSetsWinToMatch >= LEAD_ON_POINTS_TO_WIN) {
+            return MatchState.PLAYER_ONE_WIN;
+        } else if (playerTwoSetsWinToMatch >= setsCountInGame && playerTwoSetsWinToMatch - playerOneSetsWinToMatch >= LEAD_ON_POINTS_TO_WIN) {
+            return MatchState.PLAYER_TWO_WIN
+        }
 
+        match.setState(MatchState.ONGOING);
+        return MatchState.ONGOING;
     }
 
     private MatchState checkCurrentSet() {
@@ -85,6 +89,7 @@ public class MatchScoreCalculationService {
 
     private MatchState taiBreakSetCalculation(int playerOneGamesWinToSet, int playerTwoGamesWinToSet) {
         MatchState gameState = MatchState.ONGOING;
+
         if (playerOneGamesWinToSet >= TAI_BREAK_WIN_SCORES_COUNT && playerOneGamesWinToSet - playerTwoGamesWinToSet >= LEAD_ON_POINTS_TO_WIN) {
             gameState =  MatchState.PLAYER_ONE_WIN;
         } else if (playerTwoGamesWinToSet >= TAI_BREAK_WIN_SCORES_COUNT && playerTwoGamesWinToSet - playerOneGamesWinToSet >= LEAD_ON_POINTS_TO_WIN) {
@@ -97,6 +102,7 @@ public class MatchScoreCalculationService {
 
     private MatchState setCalculation(int playerOneGamesWinToSet, int playerTwoGamesWinToSet) {
         MatchState gameState = MatchState.ONGOING;
+
         if (playerOneGamesWinToSet >= SET_WIN_GAMES_COUNT && playerOneGamesWinToSet - playerTwoGamesWinToSet >= LEAD_ON_POINTS_TO_WIN) {
             gameState = MatchState.PLAYER_ONE_WIN;
         } else if (playerTwoGamesWinToSet >= SET_WIN_GAMES_COUNT && playerTwoGamesWinToSet - playerOneGamesWinToSet >= LEAD_ON_POINTS_TO_WIN) {
@@ -117,7 +123,7 @@ public class MatchScoreCalculationService {
         MatchState gameState = MatchState.ONGOING;
         MatchGame currentGame = match.getCurrentGame();
         int playerOneScores = match.getPlayerWonScoresToGame(match.getPlayerOne().getName(), currentGame);
-        int playerTwoScores = match.getPlayerWonScoresToGame(match.getPlayerOne().getName(), currentGame);
+        int playerTwoScores = match.getPlayerWonScoresToGame(match.getPlayerTwo().getName(), currentGame);
 
         if (playerOneScores >= GAME_WIN_SCORES_COUNT && playerOneScores - playerTwoScores >= LEAD_ON_POINTS_TO_WIN) {
             gameState = MatchState.PLAYER_ONE_WIN;
