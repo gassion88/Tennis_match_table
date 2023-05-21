@@ -8,5 +8,6 @@ import java.util.List;
 @Data
 public class MatchSet {
     private List<MatchGame> games = new ArrayList<>();
-    private MatchState gameState;
+    private MatchState setState;
+    private boolean nowTaiBreak;
 }

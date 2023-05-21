@@ -41,7 +41,7 @@ public class MatchModel {
 
     public MatchSet getCurrentSet() {
         for (MatchSet set : sets) {
-            MatchState matchSetState = set.getGameState();
+            MatchState matchSetState = set.getSetState();
 
             if (matchSetState == MatchState.ONGOING) {
                 return set;
@@ -51,11 +51,11 @@ public class MatchModel {
         return sets.get(sets.size()-1);
     }
 
-    public int getPlayerScoredSets(MatchState state) {
+    public int getPlayerWinsSetsCountToMatch(MatchState state) {
         int playerWonSets = 0;
 
         for (MatchSet set : sets) {
-            MatchState setState = set.getGameState();
+            MatchState setState = set.getSetState();
 
             if (setState == state) {
                 playerWonSets++;
@@ -65,7 +65,7 @@ public class MatchModel {
         return playerWonSets;
     }
 
-    public int getPlayerWonGamesToSet(MatchState state, MatchSet set) {
+    public int getPlayerWinGamesCountToSet(MatchState state, MatchSet set) {
         if (set.getGames().size() == 0) {
             return 0;
         }
