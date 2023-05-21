@@ -17,32 +17,40 @@ public class MatchModel {
     private int setsCount;
     private MatchState state;
 
-    public void addScore(String scoredPlayerName) {
-       MatchGame currentGame = getOrCreateCurrentGame();
-       currentGame.addScoreToGame(scoredPlayerName);
+//    public void addScore(String scoredPlayerName) {
+//       MatchGame currentGame = getOrCreateCurrentGame();
+//       currentGame.addScoreToGame(scoredPlayerName);
+//
+//       //updateCurrentGameState();
+//    }
 
-       //updateCurrentGameState();
+    private MatchGame getCurrentGame() {
+        MatchSet currentSet = getCurrentSet();
+
+        for (MatchGame matchGame : currentSet.getGames()) {
+            MatchState gameState = matchGame.getGameState();
+
+            if (gameState == MatchState.ONGOING) {
+                return matchGame;
+            }
+        }
+
+        return currentSet.getGames().get(currentSet.getGames().size()-1);
     }
 
-    private MatchGame getOrCreateCurrentGame() {
-        MatchSet currentSet = getOrCreateCurrentSet();
-        return null;
-    }
-
-    private MatchSet getOrCreateCurrentSet() {
+    private MatchSet getCurrentSet() {
         for (MatchSet set : sets) {
             MatchState matchSetState = set.getGameState();
 
-            return null;
+            if (matchSetState == MatchState.ONGOING) {
+                return set;
+            }
         }
-        return null;
+
+        return sets.get(sets.size()-1);
     }
 
-    public int getPlayerWonSets(MatchState state) {
-        if (sets.size() == 0) {
-            return 0;
-        }
-
+    public int getPlayerScoredSets(MatchState state) {
         int playerWonSets = 0;
 
         for (MatchSet set : sets) {
@@ -63,7 +71,7 @@ public class MatchModel {
 
         int playerWonGames = 0;
 
-        MatchSet currentSet = sets.get(sets.size()-1);
+        MatchSet currentSet = getCurrentSet();
 
             for (MatchGame game :  currentSet.getGames()){
                 MatchState gameState = game.getGameState();
@@ -83,8 +91,7 @@ public class MatchModel {
 
         int playerWonScores = 0;
 
-        MatchSet currentSet = sets.get(sets.size()-1);
-        MatchGame currentGame = currentSet.getGames().get(currentSet.getGames().size()-1);
+        MatchGame currentGame = getCurrentGame();
 
         for (MatchScore score :  currentGame.getScores()){
             String scorePlayerName = score.getPlayerName();
