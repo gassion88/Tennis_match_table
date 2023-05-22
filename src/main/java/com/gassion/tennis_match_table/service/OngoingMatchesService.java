@@ -1,6 +1,7 @@
 package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.entities.DTO.NewMatchRequestDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchGame;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchSet;
@@ -22,10 +23,12 @@ public class OngoingMatchesService {
 
     private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
-    public static UUID createMatch(List<Player> players, int setsCount) throws Exception{
-        VALIDATE_UTIL.ongoingMatchExistValidation(players);
-        Player playerOne = players.get(0);
-        Player playerTwo = players.get(1);
+    public static UUID createMatch(NewMatchRequestDTO newMatchRequestDTO) throws Exception{
+        VALIDATE_UTIL.ongoingMatchExistValidation(newMatchRequestDTO.getPlayers());
+
+        Player playerOne = newMatchRequestDTO.getPlayers().get(0);
+        Player playerTwo = newMatchRequestDTO.getPlayers().get(1);
+        int setsCount = newMatchRequestDTO.getSetCount();
 
         MatchModel newMatchModel = new MatchModel();
         UUID newMatchKey = UUID.randomUUID();

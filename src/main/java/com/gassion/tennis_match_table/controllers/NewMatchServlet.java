@@ -1,7 +1,9 @@
 package com.gassion.tennis_match_table.controllers;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.entities.DTO.NewMatchRequestDTO;
 import com.gassion.tennis_match_table.entities.Player;
+import com.gassion.tennis_match_table.entities.factories.NewMatchRequestDTOFactory;
 import com.gassion.tennis_match_table.entities.factories.PlayerFactory;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.NewMatchView;
@@ -25,10 +27,9 @@ public class NewMatchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             ValidateUtil.newMatchRequestValidate(request);
-            List<Player> players = PlayerFactory.getPlayersFromRequest(request);
-            int setsCount = Integer.parseInt(request.getParameter("setsCount"));
+            NewMatchRequestDTO newMatchRequestDTO = NewMatchRequestDTOFactory.fromRequest(request);
 
-            UUID newMatchKey = OngoingMatchesService.createMatch(players, setsCount);
+            UUID newMatchKey = OngoingMatchesService.createMatch(newMatchRequestDTO);
 
             response.sendRedirect(request.getContextPath() + "/match-score?uuid=" + newMatchKey);
         } catch (Exception e) {

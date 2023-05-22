@@ -4,6 +4,7 @@ import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
+import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
 import com.gassion.tennis_match_table.service.MatchScoreCalculationService;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.MatchScoreView;
@@ -38,6 +39,10 @@ public class MatchScoreServlet extends HttpServlet {
 
             MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService(matchModel);
             matchScoreCalculationService.goal(playerName);
+
+            if (matchModel.getState() != MatchState.ONGOING) {
+                
+            }
 
             TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(matchModel);
             MATCH_SCORE_VIEW.display(request, response, matchDTO);
