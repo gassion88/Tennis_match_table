@@ -3,8 +3,13 @@ package com.gassion.tennis_match_table.controllers;
 import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
+import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
+import com.gassion.tennis_match_table.entities.Player;
+import com.gassion.tennis_match_table.entities.factories.MatchFactory;
+import com.gassion.tennis_match_table.repository.MatchDAO;
+import com.gassion.tennis_match_table.repository.PlayerDAO;
 import com.gassion.tennis_match_table.service.MatchScoreCalculationService;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.MatchScoreView;
@@ -43,8 +48,10 @@ public class MatchScoreServlet extends HttpServlet {
             MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService(matchModel);
             matchScoreCalculationService.goal(playerName);
 
-            if (matchModel.getState() != MatchState.ONGOING) {
-                
+            if (!matchModel.isOngoing()) {
+                long savedMatchId = OngoingMatchesService.saveMatch(matchModel);
+                response.sendRedirect(request.getContextPath() + "/match/" + savedMatchId);
+                return;
             }
 
             TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(matchModel);
