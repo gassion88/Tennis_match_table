@@ -5,6 +5,8 @@ import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.NewMatchConfigurationDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.*;
 import com.gassion.tennis_match_table.entities.Match;
+import com.gassion.tennis_match_table.entities.Player;
+import com.gassion.tennis_match_table.entities.factories.MatchFactory;
 import com.gassion.tennis_match_table.repository.MatchDAO;
 import com.gassion.tennis_match_table.repository.PlayerDAO;
 
@@ -38,11 +40,27 @@ public class OngoingMatchesService {
         return ongoingMatches.get(matchKey);
     }
 
-    public static void deleteMatch(Long matchID) {
+    public static void deleteMatch(UUID matchID) throws MatchNotFoundException {
+        if (!ongoingMatches.containsKey(matchID)) {
+            throw new MatchNotFoundException("Match not found");
+        }
 
+        ongoingMatches.remove(matchID);
     }
 
-    public static void saveMatch(Match match) {
+    public static long saveMatch(MatchModel matchModel) throws MatchNotFoundException {
+        deleteMatch(matchModel.getMatchUUID());
 
+        Player playerOne = matchModel.getPlayerOne();
+        Player playerTwo = matchModel.getPlayerTwo();
+        new PlayerDAO().add(playerOne);
+        new PlayerDAO().add(playerTwo);
+        matchModel.getPlayerOne().setId(playerOne.getId());
+        matchModel.getPlayerTwo().setId(playerTwo.getId());
+
+        Match match = MatchFactory.fromMatchModel(matchModel);
+        new MatchDAO().add(match);
+
+        return match.getId();
     }
 }
