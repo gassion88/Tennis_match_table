@@ -26,9 +26,9 @@ public class NewMatchServlet extends HttpServlet {
             ValidateUtil.newMatchRequestValidate(request);
             NewMatchConfigurationDTO newMatchConfigurationDTO = NewMatchConfigurationDTOFactory.fromRequest(request);
 
-            UUID newMatchKey = OngoingMatchesService.createMatch(newMatchConfigurationDTO);
+            UUID newMatchUUID = OngoingMatchesService.createMatch(newMatchConfigurationDTO);
 
-            response.sendRedirect(request.getContextPath() + "/match-score?uuid=" + newMatchKey);
+            response.sendRedirect(request.getContextPath() + "/match-score?uuid=" + newMatchUUID);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
