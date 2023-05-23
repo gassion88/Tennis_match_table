@@ -1,7 +1,10 @@
 package com.gassion.tennis_match_table.entities.DTO;
 
+import lombok.AllArgsConstructor;
+
 import java.util.UUID;
 
+@AllArgsConstructor
 public class TwoPlayersMatchDTO extends DTO{
     public UUID matchUUID;
     public String PlayerOneName;

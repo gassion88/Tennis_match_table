@@ -21,6 +21,7 @@ public class MatchScoreServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
+
         MatchModel match = OngoingMatchesService.getMatchModel(matchUUID);
         TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(match);
 
@@ -31,7 +32,6 @@ public class MatchScoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             String playerName = request.getParameter("goal");
-            System.out.println(request.getParameter("uuid"));
             UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
 
             MatchModel matchModel = OngoingMatchesService.getMatchModel(matchUUID);
