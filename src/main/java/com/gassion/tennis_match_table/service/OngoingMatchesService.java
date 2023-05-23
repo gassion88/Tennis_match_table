@@ -2,10 +2,7 @@ package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.DTO.NewMatchConfigurationDTO;
-import com.gassion.tennis_match_table.entities.MatchModel.MatchGame;
-import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
-import com.gassion.tennis_match_table.entities.MatchModel.MatchSet;
-import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
+import com.gassion.tennis_match_table.entities.MatchModel.*;
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;
@@ -22,27 +19,13 @@ public class OngoingMatchesService {
 
     private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
-    public static UUID createMatch(NewMatchConfigurationDTO newMatchConfigurationDTO) throws Exception{
+    public static UUID createMatch(NewMatchConfigurationDTO newMatchConfigurationDTO) throws Exception {
         VALIDATE_UTIL.ongoingMatchExistValidation(newMatchConfigurationDTO.getPlayers());
 
-        Player playerOne = newMatchConfigurationDTO.getPlayers().get(0);
-        Player playerTwo = newMatchConfigurationDTO.getPlayers().get(1);
-        int setsCount = newMatchConfigurationDTO.getSetCount();
+        MatchModel newMatchModel = MatchModelFactory.fromDTO(newMatchConfigurationDTO);
 
-        MatchModel newMatchModel = new MatchModel();
-        UUID newMatchKey = UUID.randomUUID();
-        newMatchModel.setPlayerOne(playerOne);
-        newMatchModel.setPlayerTwo(playerTwo);
-        newMatchModel.setMatchUUID(newMatchKey);
-        newMatchModel.setSetsCountInGame(setsCount);
-        newMatchModel.getSets().add(new MatchSet());
-        newMatchModel.getCurrentSet().setSetState(MatchState.ONGOING);
-        newMatchModel.getCurrentSet().getGames().add(new MatchGame());
-        newMatchModel.getCurrentGame().setGameState(MatchState.ONGOING);
-        newMatchModel.setState(MatchState.ONGOING);
-
-        ongoingMatches.put(newMatchKey, newMatchModel);
-        return newMatchKey;
+        ongoingMatches.put(newMatchModel.getMatchUUID(), newMatchModel);
+        return newMatchModel.getMatchUUID();
     }
 
     public static MatchModel getMatchModel(UUID matchKey) {
