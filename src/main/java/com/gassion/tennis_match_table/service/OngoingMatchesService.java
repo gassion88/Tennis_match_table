@@ -1,6 +1,7 @@
 package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.NewMatchConfigurationDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.*;
 import com.gassion.tennis_match_table.entities.Match;
@@ -28,7 +29,13 @@ public class OngoingMatchesService {
         return newMatchModel.getMatchUUID();
     }
 
-    public static MatchModel getMatchModel(UUID matchKey) {
+    public static MatchModel getMatchModel(UUID matchKey) throws MatchNotFoundException {
+        MatchModel match = ongoingMatches.get(matchKey);
+
+        if (match == null) {
+            throw new MatchNotFoundException("Match not found");
+        }
+
         return ongoingMatches.get(matchKey);
     }
 
