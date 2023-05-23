@@ -8,10 +8,10 @@ import java.util.List;
 @Data
 public class MatchGame {
     private List<MatchScore> scores = new ArrayList<>();
-    private MatchState gameState;
+    private MatchState state;
 
     public MatchGame() {
-        this.gameState = MatchState.ONGOING;
+        this.state = MatchState.ONGOING;
     }
 
     public void addScoreToGame(String ScoredPlayerName) {
@@ -20,6 +20,6 @@ public class MatchGame {
     }
 
     public boolean isOngoing() {
-        return gameState == MatchState.ONGOING;
+        return state == MatchState.ONGOING;
     }
 }

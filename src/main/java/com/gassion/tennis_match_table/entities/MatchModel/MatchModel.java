@@ -77,7 +77,7 @@ public class MatchModel {
         int playerWinGames = 0;
 
             for (MatchGame game :  set.getGames()){
-                MatchState gameState = game.getGameState();
+                MatchState gameState = game.getState();
 
                 if (gameState == state) {
                     playerWinGames++;

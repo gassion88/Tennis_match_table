@@ -1,6 +1,5 @@
 package com.gassion.tennis_match_table.controllers;
 
-import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;

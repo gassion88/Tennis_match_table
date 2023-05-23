@@ -18,7 +18,7 @@ public class MatchSet {
 
     public void addGameToSet() {
         MatchGame newGame = new MatchGame();
-        newGame.setGameState(MatchState.ONGOING);
+        newGame.setState(MatchState.ONGOING);
 
         games.add(newGame);
     }

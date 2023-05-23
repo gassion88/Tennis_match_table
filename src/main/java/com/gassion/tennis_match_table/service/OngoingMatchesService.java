@@ -5,7 +5,6 @@ import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.NewMatchConfigurationDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.*;
 import com.gassion.tennis_match_table.entities.Match;
-import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;
 import com.gassion.tennis_match_table.repository.PlayerDAO;
 
