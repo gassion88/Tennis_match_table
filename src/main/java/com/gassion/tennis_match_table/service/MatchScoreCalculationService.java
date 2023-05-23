@@ -7,9 +7,8 @@ import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
 
 public class MatchScoreCalculationService {
     private final MatchModel match;
-    private int setsCountInGame;
-    private int numberOfSetsToWin;
-    private boolean taiBreak;
+    private final int setsCountInGame;
+    private final boolean taiBreak;
     private final static int LEAD_ON_POINTS_TO_WIN = 2;
     private final static int GAME_WIN_SCORES_COUNT = 4;
     private final static int SET_WIN_GAMES_COUNT = 6;
@@ -19,7 +18,6 @@ public class MatchScoreCalculationService {
         this.setsCountInGame = match.getSetsCountInGame();
         this.taiBreak = match.isTaiBreak();
         this.match = match;
-        this.numberOfSetsToWin = (match.getSetsCountInGame() / 2) + 1;
     }
 
     public void goal(String scoredPlayerName) {
@@ -54,11 +52,11 @@ public class MatchScoreCalculationService {
         int playerTwoSetsWinToMatch = match.getPlayerWinsSetsCountToMatch(MatchState.PLAYER_ONE_WIN);
 
         if (match.getSets().size() <= setsCountInGame) {
-            if (playerOneSetsWinToMatch == numberOfSetsToWin) {
+            if (playerOneSetsWinToMatch == getNumberSetsToWin()) {
                 return MatchState.PLAYER_ONE_WIN;
             }
 
-            if (playerTwoSetsWinToMatch == numberOfSetsToWin) {
+            if (playerTwoSetsWinToMatch == getNumberSetsToWin()) {
                 return MatchState.PLAYER_TWO_WIN;
             }
         }
@@ -137,6 +135,8 @@ public class MatchScoreCalculationService {
 
         return gameState;
     }
-
-
+    
+    private int getNumberSetsToWin() {
+        return (match.getSetsCountInGame() / 2) + 1;
+    }
 }
