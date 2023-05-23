@@ -1,7 +1,7 @@
 package com.gassion.tennis_match_table.service;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
-import com.gassion.tennis_match_table.entities.DTO.NewMatchRequestDTO;
+import com.gassion.tennis_match_table.entities.DTO.NewMatchConfigurationDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchGame;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchSet;
@@ -11,7 +11,6 @@ import com.gassion.tennis_match_table.entities.Player;
 import com.gassion.tennis_match_table.repository.MatchDAO;
 import com.gassion.tennis_match_table.repository.PlayerDAO;
 
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
@@ -23,12 +22,12 @@ public class OngoingMatchesService {
 
     private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
-    public static UUID createMatch(NewMatchRequestDTO newMatchRequestDTO) throws Exception{
-        VALIDATE_UTIL.ongoingMatchExistValidation(newMatchRequestDTO.getPlayers());
+    public static UUID createMatch(NewMatchConfigurationDTO newMatchConfigurationDTO) throws Exception{
+        VALIDATE_UTIL.ongoingMatchExistValidation(newMatchConfigurationDTO.getPlayers());
 
-        Player playerOne = newMatchRequestDTO.getPlayers().get(0);
-        Player playerTwo = newMatchRequestDTO.getPlayers().get(1);
-        int setsCount = newMatchRequestDTO.getSetCount();
+        Player playerOne = newMatchConfigurationDTO.getPlayers().get(0);
+        Player playerTwo = newMatchConfigurationDTO.getPlayers().get(1);
+        int setsCount = newMatchConfigurationDTO.getSetCount();
 
         MatchModel newMatchModel = new MatchModel();
         UUID newMatchKey = UUID.randomUUID();

@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class NewMatchRequestDTO {
+public class NewMatchConfigurationDTO {
     private List<Player> players;
     private int setCount;
 }
