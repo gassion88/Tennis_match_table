@@ -8,11 +8,11 @@ import java.util.List;
 @Data
 public class MatchSet {
     private List<MatchGame> games = new ArrayList<>();
-    private MatchState setState;
+    private MatchState state;
     private boolean nowTaiBreak;
 
     public MatchSet() {
-        this.setState = MatchState.ONGOING;
+        this.state = MatchState.ONGOING;
         this.games.add(new MatchGame());
     }
 
@@ -21,5 +21,9 @@ public class MatchSet {
         newGame.setGameState(MatchState.ONGOING);
 
         games.add(newGame);
+    }
+
+    public boolean isOngoing() {
+        return state == MatchState.ONGOING;
     }
 }

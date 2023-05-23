@@ -18,4 +18,8 @@ public class MatchGame {
         MatchScore newScore = new MatchScore(ScoredPlayerName);
         scores.add(newScore);
     }
+
+    public boolean isOngoing() {
+        return gameState == MatchState.ONGOING;
+    }
 }

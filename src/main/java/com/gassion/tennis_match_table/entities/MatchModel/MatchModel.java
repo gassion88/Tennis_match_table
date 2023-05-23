@@ -111,4 +111,8 @@ public class MatchModel {
 
         return playerWonScores;
     }
+
+    public boolean isOngoing() {
+        return state == MatchState.ONGOING;
+    }
 }
