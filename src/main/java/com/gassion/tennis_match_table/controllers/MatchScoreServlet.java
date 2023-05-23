@@ -35,7 +35,6 @@ public class MatchScoreServlet extends HttpServlet {
             UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
 
             MatchModel matchModel = OngoingMatchesService.getMatchModel(matchUUID);
-            ValidateUtil.matchEndValidate(matchModel.getState());
 
             MatchScoreCalculationService matchScoreCalculationService = new MatchScoreCalculationService(matchModel);
             matchScoreCalculationService.goal(playerName);
