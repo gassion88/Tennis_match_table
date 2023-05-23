@@ -1,6 +1,7 @@
 package com.gassion.tennis_match_table.controllers;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
+import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
@@ -20,12 +21,16 @@ public class MatchScoreServlet extends HttpServlet {
     private final static MatchScoreView MATCH_SCORE_VIEW = new MatchScoreView();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
+        try {
+            UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
 
-        MatchModel match = OngoingMatchesService.getMatchModel(matchUUID);
-        TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(match);
+            MatchModel match = OngoingMatchesService.getMatchModel(matchUUID);
+            TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(match);
 
-        MATCH_SCORE_VIEW.display(request, response, matchDTO);
+            MATCH_SCORE_VIEW.display(request, response, matchDTO);
+        } catch (MatchNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
