@@ -10,6 +10,10 @@ public class MatchGame {
     private List<MatchScore> scores = new ArrayList<>();
     private MatchState gameState;
 
+    public MatchGame() {
+        this.gameState = MatchState.ONGOING;
+    }
+
     public void addScoreToGame(String ScoredPlayerName) {
         MatchScore newScore = new MatchScore(ScoredPlayerName);
         scores.add(newScore);

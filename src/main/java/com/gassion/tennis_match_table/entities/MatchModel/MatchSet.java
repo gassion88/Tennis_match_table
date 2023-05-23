@@ -11,6 +11,11 @@ public class MatchSet {
     private MatchState setState;
     private boolean nowTaiBreak;
 
+    public MatchSet() {
+        this.setState = MatchState.ONGOING;
+        this.games.add(new MatchGame());
+    }
+
     public void addGameToSet() {
         MatchGame newGame = new MatchGame();
         newGame.setGameState(MatchState.ONGOING);

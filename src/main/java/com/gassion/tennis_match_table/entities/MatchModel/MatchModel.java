@@ -1,6 +1,7 @@
 package com.gassion.tennis_match_table.entities.MatchModel;
 
 import com.gassion.tennis_match_table.entities.Player;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -17,6 +18,16 @@ public class MatchModel {
     private int setsCountInGame;
     private boolean taiBreak;
     private MatchState state;
+
+    public MatchModel(UUID matchUUID, Player playerOne, Player playerTwo, int setsCountInGame, boolean taiBreak) {
+        this.matchUUID = matchUUID;
+        PlayerOne = playerOne;
+        PlayerTwo = playerTwo;
+        this.setsCountInGame = setsCountInGame;
+        this.taiBreak = taiBreak;
+        this.state = MatchState.ONGOING;
+        this.sets.add(new MatchSet());
+    }
 
     public void addSetToMatch() {
         MatchSet newSet = new MatchSet();
