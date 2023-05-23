@@ -104,4 +104,14 @@ public class MatchModel {
     public boolean isOngoing() {
         return state == MatchState.ONGOING;
     }
+
+    public Player getWinner() {
+        if (state == MatchState.PLAYER_ONE_WIN){
+            return PlayerOne;
+        } else if (state == MatchState.PLAYER_TWO_WIN) {
+            return PlayerTwo;
+        } else {
+            return null;
+        }
+    }
 }
