@@ -2,7 +2,7 @@ package com.gassion.tennis_match_table.controllers;
 
 import com.gassion.tennis_match_table.Util.ValidateUtil;
 import com.gassion.tennis_match_table.entities.DTO.NewMatchConfigurationDTO;
-import com.gassion.tennis_match_table.entities.factories.NewMatchRequestDTOFactory;
+import com.gassion.tennis_match_table.entities.factories.NewMatchConfigurationDTOFactory;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.NewMatchView;
 import jakarta.servlet.*;
@@ -24,7 +24,7 @@ public class NewMatchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         try {
             ValidateUtil.newMatchRequestValidate(request);
-            NewMatchConfigurationDTO newMatchConfigurationDTO = NewMatchRequestDTOFactory.fromRequest(request);
+            NewMatchConfigurationDTO newMatchConfigurationDTO = NewMatchConfigurationDTOFactory.fromRequest(request);
 
             UUID newMatchKey = OngoingMatchesService.createMatch(newMatchConfigurationDTO);
 

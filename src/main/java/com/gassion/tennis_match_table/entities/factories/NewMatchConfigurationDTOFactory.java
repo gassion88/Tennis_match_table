@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import java.util.List;
 
-public class NewMatchRequestDTOFactory {
+public class NewMatchConfigurationDTOFactory {
     public static NewMatchConfigurationDTO fromRequest(HttpServletRequest request) {
         List<Player> players = PlayerFactory.getPlayersFromRequest(request);
         int setsCount = Integer.parseInt(request.getParameter("setsCount"));
