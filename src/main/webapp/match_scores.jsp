@@ -1,6 +1,6 @@
-<%@ page import="com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO" %>
+<%@ page import="com.gassion.tennis_match_table.entities.DTO.OngoingMatchDTO" %>
 <%
-    TwoPlayersMatchDTO matchDTO = (TwoPlayersMatchDTO) request.getAttribute("matchJSON");
+    OngoingMatchDTO matchDTO = (OngoingMatchDTO) request.getAttribute("matchJSON");
 %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

@@ -2,14 +2,8 @@ package com.gassion.tennis_match_table.controllers;
 
 import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
-import com.gassion.tennis_match_table.entities.DTO.TwoPlayersMatchDTO;
-import com.gassion.tennis_match_table.entities.Match;
+import com.gassion.tennis_match_table.entities.DTO.OngoingMatchDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
-import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
-import com.gassion.tennis_match_table.entities.Player;
-import com.gassion.tennis_match_table.entities.factories.MatchFactory;
-import com.gassion.tennis_match_table.repository.MatchDAO;
-import com.gassion.tennis_match_table.repository.PlayerDAO;
 import com.gassion.tennis_match_table.service.MatchScoreCalculationService;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.MatchScoreView;
@@ -29,7 +23,7 @@ public class MatchScoreServlet extends HttpServlet {
             UUID matchUUID = UUID.fromString(request.getParameter("uuid"));
 
             MatchModel match = OngoingMatchesService.getMatchModel(matchUUID);
-            TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(match);
+            OngoingMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(match);
 
             MATCH_SCORE_VIEW.display(request, response, matchDTO);
         } catch (MatchNotFoundException e) {
@@ -54,7 +48,7 @@ public class MatchScoreServlet extends HttpServlet {
                 return;
             }
 
-            TwoPlayersMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(matchModel);
+            OngoingMatchDTO matchDTO = MatchDTOFactory.fromMatchModel(matchModel);
             MATCH_SCORE_VIEW.display(request, response, matchDTO);
         } catch (Exception e) {
             throw new RuntimeException(e);

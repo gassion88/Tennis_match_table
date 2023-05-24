@@ -32,6 +32,21 @@ public class ValidateUtil {
         }
     }
 
+    public static void matchRequestValidate(HttpServletRequest request) throws RequestParamException {
+        long matchID = getMatchIDInRequest(request);
+
+        if (matchID == 0) {
+            throw new RequestParamException("Invalid ID value");
+        }
+    }
+
+    public static long getMatchIDInRequest(HttpServletRequest request) {
+        String pathInfo = request.getPathInfo();
+        String[] pathParts = pathInfo.split("/");
+
+        return Long.parseLong(pathParts[1]);
+    }
+
     public void ongoingMatchExistValidation(List<Player> players) throws Exception {
         String newMatchPlayerOneName = players.get(0).getName();
         String newMatchPlayerTwoName = players.get(1).getName();
