@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import java.util.UUID;
 
 @AllArgsConstructor
-public class TwoPlayersMatchDTO extends DTO{
+public class OngoingMatchDTO extends DTO{
     public UUID matchUUID;
     public String PlayerOneName;
     public String PlayerTwoName;

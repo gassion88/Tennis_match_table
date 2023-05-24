@@ -1,12 +1,13 @@
 package com.gassion.tennis_match_table.entities.DTO;
 
+import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchState;
 
 import java.util.UUID;
 
 public class MatchDTOFactory {
-    public static TwoPlayersMatchDTO fromMatchModel(MatchModel matchModel) {
+    public static OngoingMatchDTO fromMatchModel(MatchModel matchModel) {
         UUID matchUUID = matchModel.getMatchUUID();
         String playerOneName = matchModel.getPlayerOne().getName();
         String playerTwoName = matchModel.getPlayerTwo().getName();
@@ -17,6 +18,15 @@ public class MatchDTOFactory {
         int playerOneScores = matchModel.getPlayerWonScoresToGame(matchModel.getPlayerOne().getName(), matchModel.getCurrentGame());
         int playerTwoScores = matchModel.getPlayerWonScoresToGame(matchModel.getPlayerTwo().getName(), matchModel.getCurrentGame());
 
-        return new TwoPlayersMatchDTO(matchUUID, playerOneName, playerTwoName, playerOneSets, playerTwoSets, playerOneGames, playerTwoGames, playerOneScores, playerTwoScores);
+        return new OngoingMatchDTO(matchUUID, playerOneName, playerTwoName, playerOneSets, playerTwoSets, playerOneGames, playerTwoGames, playerOneScores, playerTwoScores);
+    }
+
+    public static MatchDTO fromMatch(Match match) {
+        long matchID = match.getId();
+        long playerOneID = match.getPlayer1();
+        long playerTwoID = match.getPlayer2();
+        long winnerID = match.getWinner();
+
+        return new MatchDTO(matchID, playerOneID, playerTwoID, winnerID);
     }
 }
