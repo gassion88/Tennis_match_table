@@ -4,6 +4,7 @@ import com.gassion.tennis_match_table.Util.exceptions.MatchNotFoundException;
 import com.gassion.tennis_match_table.entities.DTO.MatchDTOFactory;
 import com.gassion.tennis_match_table.entities.DTO.OngoingMatchDTO;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
+import com.gassion.tennis_match_table.service.FinishedMatchesPersistenceService;
 import com.gassion.tennis_match_table.service.MatchScoreCalculationService;
 import com.gassion.tennis_match_table.service.OngoingMatchesService;
 import com.gassion.tennis_match_table.view.MatchScoreView;
@@ -43,7 +44,9 @@ public class MatchScoreServlet extends HttpServlet {
             matchScoreCalculationService.goal(playerName);
 
             if (!matchModel.isOngoing()) {
-                long savedMatchId = OngoingMatchesService.saveMatch(matchModel);
+                OngoingMatchesService.deleteMatch(matchUUID);
+                long savedMatchId = FinishedMatchesPersistenceService.saveMatch(matchModel);
+                
                 response.sendRedirect(request.getContextPath() + "/match/" + savedMatchId);
                 return;
             }

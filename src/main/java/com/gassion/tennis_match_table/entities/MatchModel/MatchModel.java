@@ -86,13 +86,13 @@ public class MatchModel {
         return playerWinGames;
     }
 
-    public int getPlayerWinScoresToGame(String playerName, MatchGame game) {
+    public int getTeamWinScoresToGame(Team team, MatchGame game) {
         int playerWonScores = 0;
 
         for (MatchScore score :  game.getScores()){
-            String scorePlayerName = score.getPlayerName();
+            String scoredPlayerName = score.getPlayerName();
 
-            if (Objects.equals(scorePlayerName, playerName)) {
+            if (team.isPlayerExist(scoredPlayerName)) {
                 playerWonScores++;
             }
         }

@@ -22,7 +22,7 @@ public class OngoingMatchesService {
     private static final ValidateUtil VALIDATE_UTIL = new ValidateUtil();
 
     public static UUID createMatch(NewMatchConfigurationDTO newMatchConfigurationDTO) throws Exception {
-        VALIDATE_UTIL.ongoingMatchExistValidation(newMatchConfigurationDTO.getPlayers());
+        //VALIDATE_UTIL.ongoingMatchExistValidation(newMatchConfigurationDTO.getPlayers());
 
         MatchModel newMatchModel = MatchModelFactory.fromDTO(newMatchConfigurationDTO);
 
@@ -46,21 +46,5 @@ public class OngoingMatchesService {
         }
 
         ongoingMatches.remove(matchID);
-    }
-
-    public static long saveMatch(MatchModel matchModel) throws MatchNotFoundException {
-        deleteMatch(matchModel.getMatchUUID());
-
-        Player playerOne = matchModel.getPlayerOne();
-        Player playerTwo = matchModel.getPlayerTwo();
-        new PlayerDAO().add(playerOne);
-        new PlayerDAO().add(playerTwo);
-        matchModel.getPlayerOne().setId(playerOne.getId());
-        matchModel.getPlayerTwo().setId(playerTwo.getId());
-
-        Match match = MatchFactory.fromMatchModel(matchModel);
-        new MatchDAO().add(match);
-
-        return match.getId();
     }
 }

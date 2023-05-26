@@ -20,30 +20,30 @@
         <table>
             <tr>
                 <td></td>
-                <th><%=matchDTO.PlayerOneName%></th>
-                <th><%=matchDTO.PlayerTwoName%></th>
+                <th><%=matchDTO.teamOne%></th>
+                <th><%=matchDTO.teamTwo%></th>
             </tr>
             <tr>
                 <td>Score</td>
-                <td><%=matchDTO.PlayerOneScores%></td>
+                <td><%=matchDTO.TeamOneScoresWin%></td>
                 <td><%=matchDTO.PlayerTwoScores%></td>
             </tr>
             <tr>
                 <td>Game</td>
-                <td><%=matchDTO.PlayerOneGames%></td>
+                <td><%=matchDTO.TeamOneGamesWin%></td>
                 <td><%=matchDTO.PlayerTwoGames%></td>
             </tr>
             <tr>
                 <td>Set</td>
-                <td><%=matchDTO.PlayerOneSets%></td>
-                <td><%=matchDTO.PlayerTwoSets%></td>
+                <td><%=matchDTO.TeamOneSetsWin%></td>
+                <td><%=matchDTO.TeamTwoSetWin%></td>
             </tr>
         </table>
 
         <div>
             <form action="match-score?uuid=<%=matchDTO.matchUUID.toString()%>" method="post" name="scoredform">
-                <button name = "goal" value="<%=matchDTO.PlayerOneName%>"><%=matchDTO.PlayerOneName%> scored!</button>
-                <button name="goal" value="<%=matchDTO.PlayerTwoName%>"><%=matchDTO.PlayerTwoName%> scored!</button>
+                <button name = "goal" value="<%=matchDTO.teamOne%>"><%=matchDTO.teamOne%> scored!</button>
+                <button name="goal" value="<%=matchDTO.teamTwo%>"><%=matchDTO.teamTwo%> scored!</button>
             </form>
         </div>
 

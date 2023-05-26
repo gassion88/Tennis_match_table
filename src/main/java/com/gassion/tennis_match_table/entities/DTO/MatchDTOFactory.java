@@ -9,14 +9,14 @@ import java.util.UUID;
 public class MatchDTOFactory {
     public static OngoingMatchDTO fromMatchModel(MatchModel matchModel) {
         UUID matchUUID = matchModel.getMatchUUID();
-        String playerOneName = matchModel.getPlayerOne().getName();
+        String playerOneName = matchModel.getTeamOne().getName();
         String playerTwoName = matchModel.getPlayerTwo().getName();
         int playerOneSets = matchModel.getTeamWinsSetsCountToMatch(MatchState.PLAYER_ONE_WIN);
         int playerTwoSets = matchModel.getTeamWinsSetsCountToMatch(MatchState.PLAYER_TWO_WIN);
         int playerOneGames = matchModel.getPlayerWinGamesCountToSet(MatchState.PLAYER_ONE_WIN, matchModel.getCurrentSet());
         int playerTwoGames = matchModel.getPlayerWinGamesCountToSet(MatchState.PLAYER_TWO_WIN, matchModel.getCurrentSet());
-        int playerOneScores = matchModel.getPlayerWinScoresToGame(matchModel.getPlayerOne().getName(), matchModel.getCurrentGame());
-        int playerTwoScores = matchModel.getPlayerWinScoresToGame(matchModel.getPlayerTwo().getName(), matchModel.getCurrentGame());
+        int playerOneScores = matchModel.getTeamWinScoresToGame(matchModel.getTeamOne().getName(), matchModel.getCurrentGame());
+        int playerTwoScores = matchModel.getTeamWinScoresToGame(matchModel.getPlayerTwo().getName(), matchModel.getCurrentGame());
 
         return new OngoingMatchDTO(matchUUID, playerOneName, playerTwoName, playerOneSets, playerTwoSets, playerOneGames, playerTwoGames, playerOneScores, playerTwoScores);
     }

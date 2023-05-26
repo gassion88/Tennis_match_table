@@ -47,13 +47,13 @@ public class ValidateUtil {
         return Long.parseLong(pathParts[1]);
     }
 
-    public void ongoingMatchExistValidation(List<Player> players) throws Exception {
-        String newMatchPlayerOneName = players.get(0).getName();
-        String newMatchPlayerTwoName = players.get(1).getName();
-
-        if (OngoingMatchesService.ongoingMatches.containsKey(newMatchPlayerOneName + newMatchPlayerTwoName) ||
-                OngoingMatchesService.ongoingMatches.containsKey(newMatchPlayerTwoName + newMatchPlayerOneName)) {
-            throw new Exception("Exist Players");
-        }
-    }
+//    public void ongoingMatchExistValidation(List<Player> players) throws Exception {
+//        String newMatchPlayerOneName = players.get(0).getName();
+//        String newMatchPlayerTwoName = players.get(1).getName();
+//
+//        if (OngoingMatchesService.ongoingMatches.containsKey(newMatchPlayerOneName + newMatchPlayerTwoName) ||
+//                OngoingMatchesService.ongoingMatches.containsKey(newMatchPlayerTwoName + newMatchPlayerOneName)) {
+//            throw new Exception("Exist Players");
+//        }
+//    }
 }
