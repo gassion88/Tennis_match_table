@@ -2,7 +2,6 @@ package com.gassion.tennis_match_table.entities.factories;
 
 import com.gassion.tennis_match_table.entities.Match;
 import com.gassion.tennis_match_table.entities.MatchModel.MatchModel;
-import com.gassion.tennis_match_table.entities.Player;
 
 public class MatchFactory {
     public static Match fromMatchModel(MatchModel matchModel) {

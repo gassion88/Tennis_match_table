@@ -1,7 +1,6 @@
 package com.gassion.tennis_match_table.entities.MatchModel;
 
-import com.gassion.tennis_match_table.entities.Player;
-import lombok.AllArgsConstructor;
+import com.gassion.tennis_match_table.entities.team.Team;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -12,17 +11,17 @@ import java.util.UUID;
 @Data
 public class MatchModel {
     private UUID matchUUID;
-    private Player PlayerOne;
-    private Player PlayerTwo;
+    private Team teamOne;
+    private Team teamTwo;
     private List<MatchSet> sets = new ArrayList<>();
     private int setsCountInGame;
     private boolean taiBreak;
     private MatchState state;
 
-    public MatchModel(UUID matchUUID, Player playerOne, Player playerTwo, int setsCountInGame, boolean taiBreak) {
+    public MatchModel(UUID matchUUID, Team teamOne, Team teamTwo, int setsCountInGame, boolean taiBreak) {
         this.matchUUID = matchUUID;
-        PlayerOne = playerOne;
-        PlayerTwo = playerTwo;
+        this.teamOne = teamOne;
+        this.teamTwo = teamTwo;
         this.setsCountInGame = setsCountInGame;
         this.taiBreak = taiBreak;
         this.state = MatchState.ONGOING;
@@ -59,13 +58,13 @@ public class MatchModel {
         return sets.get(sets.size()-1);
     }
 
-    public int getPlayerWinsSetsCountToMatch(MatchState state) {
+    public int getTeamWinsSetsCountToMatch(MatchState team) {
         int playerWonSets = 0;
 
         for (MatchSet set : sets) {
-            MatchState setState = set.getState();
+            MatchState state = set.getState();
 
-            if (setState == state) {
+            if (state == team) {
                 playerWonSets++;
             }
         }
@@ -73,13 +72,13 @@ public class MatchModel {
         return playerWonSets;
     }
 
-    public int getPlayerWinGamesCountToSet(MatchState state, MatchSet set) {
+    public int getTeamWinGamesCountToSet(MatchState team, MatchSet set) {
         int playerWinGames = 0;
 
             for (MatchGame game :  set.getGames()){
-                MatchState gameState = game.getState();
+                MatchState state = game.getState();
 
-                if (gameState == state) {
+                if (state == team) {
                     playerWinGames++;
                 }
             }
@@ -87,7 +86,7 @@ public class MatchModel {
         return playerWinGames;
     }
 
-    public int getPlayerWonScoresToGame(String playerName, MatchGame game) {
+    public int getPlayerWinScoresToGame(String playerName, MatchGame game) {
         int playerWonScores = 0;
 
         for (MatchScore score :  game.getScores()){
@@ -105,11 +104,11 @@ public class MatchModel {
         return state == MatchState.ONGOING;
     }
 
-    public Player getWinner() {
-        if (state == MatchState.PLAYER_ONE_WIN){
-            return PlayerOne;
-        } else if (state == MatchState.PLAYER_TWO_WIN) {
-            return PlayerTwo;
+    public Team getWinner() {
+        if (state == MatchState.TEAM_ONE_WIN){
+            return teamOne;
+        } else if (state == MatchState.TEAM_TWO_WIN) {
+            return teamTwo;
         } else {
             return null;
         }
