@@ -6,9 +6,9 @@
 <body>
     <div>
         <div class="nav">
-            <a href="match_scores.jsp">Tennis scoreboard</a>
+            <a href="../match_scores.jsp">Tennis scoreboard</a>
             <a class="current" href="${pageContext.request.contextPath}/new-match">New match</a>
-            <a href="matches.jsp">Recent matches</a>
+            <a href="../matches.jsp">Recent matches</a>
         </div>
 
         <div class="content">

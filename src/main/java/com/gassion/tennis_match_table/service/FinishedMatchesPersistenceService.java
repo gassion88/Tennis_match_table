@@ -10,18 +10,21 @@ import com.gassion.tennis_match_table.repository.PlayerDAO;
 
 public class FinishedMatchesPersistenceService {
     public static long saveMatch(MatchModel matchModel) throws MatchNotFoundException {
-        Player playerOne = matchModel.getPlayerOne();
-        Player playerTwo = matchModel.getPlayerTwo();
-        new PlayerDAO().add(playerOne);
-        new PlayerDAO().add(playerTwo);
-        matchModel.getPlayerOne().setId(playerOne.getId());
-        matchModel.getPlayerTwo().setId(playerTwo.getId());
-
-        Match match = MatchFactory.fromMatchModel(matchModel);
-        new MatchDAO().add(match);
-
-        return match.getId();
+//        Player playerOne = matchModel.getPlayerOne();
+//        Player playerTwo = matchModel.getPlayerTwo();
+//        new PlayerDAO().add(playerOne);
+//        new PlayerDAO().add(playerTwo);
+//        matchModel.getPlayerOne().setId(playerOne.getId());
+//        matchModel.getPlayerTwo().setId(playerTwo.getId());
+//
+//        Match match = MatchFactory.fromMatchModel(matchModel);
+//        new MatchDAO().add(match);
+//
+//        return match.getId();
+        return 12l;
     }
 
-    private static saveMatchPlayers()
+    private static void saveMatchPlayers() {
+
+    }
 }

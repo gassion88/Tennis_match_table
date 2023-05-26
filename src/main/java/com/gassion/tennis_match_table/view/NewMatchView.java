@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public class NewMatchView extends View{
+public class NewMatchView extends View {
     String page = "/new_match.jsp";
 
     @Override

@@ -17,4 +17,6 @@ CREATE TABLE Matches (
      foreign key (Player2) references Players(ID),
      foreign key (Winner) references Players(ID) );
 
+insert into Players (Name) values ('John');
+
 

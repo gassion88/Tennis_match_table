@@ -46,7 +46,7 @@ public class MatchScoreServlet extends HttpServlet {
             if (!matchModel.isOngoing()) {
                 OngoingMatchesService.deleteMatch(matchUUID);
                 long savedMatchId = FinishedMatchesPersistenceService.saveMatch(matchModel);
-                
+
                 response.sendRedirect(request.getContextPath() + "/match/" + savedMatchId);
                 return;
             }

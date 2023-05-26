@@ -8,9 +8,10 @@ import java.util.List;
 
 public class NewMatchConfigurationDTOFactory {
     public static NewMatchConfigurationDTO fromRequest(HttpServletRequest request) {
-        List<Player> players = PlayerFactory.getPlayersFromRequest(request);
-        int setsCount = Integer.parseInt(request.getParameter("setsCount"));
-
-        return new NewMatchConfigurationDTO(players, setsCount);
+//        List<Player> players = PlayerFactory.getPlayersFromRequest(request);
+//        int setsCount = Integer.parseInt(request.getParameter("setsCount"));
+//
+//        return new NewMatchConfigurationDTO(players, setsCount);
+        return null;
     }
 }
